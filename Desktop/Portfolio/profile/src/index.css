@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* Smooth scrolling for anchor navigation */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Base body styling */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background-color: #0f172a; /* slate-900 */
+  color: #e2e8f0; /* slate-200 */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Light theme overrides */
+html[data-theme="light"] body {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Remove default link underline (Tailwind handles states) */
+a {
+  text-decoration: none;
+}
+
+/* Text selection (subtle, premium) */
+::selection {
+  background: #c7d2fe; /* indigo-200 */
+  color: #0f172a;
+}
+
+/* Light theme text selection */
+html[data-theme="light"] ::selection {
+  background: #818cf8; /* indigo-400 */
+  color: #ffffff;
+}
+
+/* Optimize animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent layout shift */
+body {
+  scrollbar-gutter: stable;
+}
+
+/* Better button defaults */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth transitions */
+body, input, textarea, select {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Better focus outline for accessibility */
+:focus-visible {
+  outline: 2px solid #818cf8; /* indigo-400 */
+  outline-offset: 3px;
+}
+
+/* Custom scrollbar (desktop only) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617; /* slate-950 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f46e5; /* indigo-600 */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1; /* indigo-500 */
+}
+
+/* Light theme scrollbar */
+html[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9; /* slate-100 */
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #818cf8; /* indigo-400 */
+}
