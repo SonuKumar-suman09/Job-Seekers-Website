@@ -13,7 +13,8 @@ export default function Contact() {
     const payload = Object.fromEntries(form.entries());
     try {
       setStatus({ loading: true, ok: null, message: "" });
-      const res = await fetch("/api/contact", {
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const res = await fetch(`${apiUrl}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
