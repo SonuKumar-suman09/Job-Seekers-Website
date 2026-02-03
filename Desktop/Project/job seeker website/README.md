@@ -1,9 +1,19 @@
 # 🚀 CareerHub - Professional Job Portal for India
 
+## Live Website: [https://job-seeker-website-black.vercel.app](https://job-seeker-website-black.vercel.app)
+
 ## Industry-Level Web Application Built for Resume & Portfolio
 
 ### 📋 Project Overview
 CareerHub is a premium job seeker platform built with modern web technologies. It provides comprehensive job search, application tracking, 5-star ratings, and career management features with an industry-standard user interface. **100% Production Ready!**
+
+---
+
+## 🌐 Access Links
+
+**Live Website**: [https://job-seeker-website-black.vercel.app](https://job-seeker-website-black.vercel.app)
+
+**GitHub Repository**: [https://github.com/SonuKumar-suman09/Job-Seekers-Website](https://github.com/SonuKumar-suman09/Job-Seekers-Website)
 
 ---
 
