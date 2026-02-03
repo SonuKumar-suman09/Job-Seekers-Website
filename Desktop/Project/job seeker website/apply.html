@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply Now - CareerHub | Premium Job Application</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#0066cc',
+                    secondary: '#00d4ff',
+                }
+            }
+        }
+    }
+  </script>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .gradient-primary { background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%); }
+    .premium-shadow { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
+    .step-indicator { transition: all 0.3s ease; }
+    .step-active { background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%); color: white; }
+    .step-inactive { background: #e5e7eb; color: #6b7280; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 premium-shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 text-slate-900 font-bold text-xl hover:text-primary transition">
+          <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center text-white">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <span>CareerHub</span>
+        </a>
+        
+        <div class="hidden md:flex gap-8">
+          <a href="index.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="home.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+            <i class="fas fa-briefcase"></i> Jobs
+          </a>
+          <a href="apply.html" class="text-primary border-b-2 border-primary font-semibold">
+            <i class="fas fa-file-alt"></i> Apply
+          </a>
+          <a href="dashboard.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </div>
+        
+        <div id="authContainer" class="flex items-center gap-4">
+          <a href="login.html" class="px-4 py-2 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition">
+            Login
+          </a>
+          <a href="create-account.html" class="px-4 py-2 gradient-primary text-white font-semibold rounded-lg hover:shadow-lg transition">
+            Sign Up
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="min-h-screen py-12 px-4">
+    <div class="max-w-3xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <div class="inline-block mb-6 px-4 py-2 bg-blue-100 rounded-full">
+          <p class="text-sm font-bold text-primary flex items-center gap-2">
+            <i class="fas fa-check-circle"></i> Secure Application
+          </p>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Apply for Your Dream Job</h1>
+        <p class="text-xl text-slate-600">Complete this form to submit your application to top companies</p>
+      </div>
+
+      <!-- Job Information Card -->
+      <div id="jobInfoCard" class="mb-8 p-6 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl border-2 border-primary flex items-center gap-4 premium-shadow">
+        <div class="w-16 h-16 bg-slate-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+          <img id="jobLogo" src="#" alt="Company" class="w-full h-full object-contain p-1" style="display:none;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\"w-full h-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl\" id=\"logoFallback\">?</div>'" />
+          <div class="w-full h-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl" id="logoFallback">?</div>
+        </div>
+        <div>
+          <p id="jobCompanyText" class="text-sm text-slate-600">Applying to</p>
+          <h3 id="jobTitleText" class="text-2xl font-bold text-slate-900">Position</h3>
+          <p id="jobCompanyNameText" class="text-slate-700 font-semibold">Company Name</p>
+        </div>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="mb-12">
+        <div class="flex items-center justify-between mb-8">
+          <div class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-bold">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="flex-1 h-1 bg-gradient-primary mx-2"></div>
+          <div class="step-indicator step-inactive w-12 h-12 rounded-full flex items-center justify-center font-bold">
+            2
+          </div>
+          <div class="flex-1 h-1 bg-slate-300 mx-2"></div>
+          <div class="step-indicator step-inactive w-12 h-12 rounded-full flex items-center justify-center font-bold">
+            3
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
+          <span><i class="fas fa-user mr-2"></i>Personal Info</span>
+          <span><i class="fas fa-file-alt mr-2"></i>Resume</span>
+          <span><i class="fas fa-paper-plane mr-2"></i>Review</span>
+        </div>
+      </div>
+
+      <!-- Application Form -->
+      <div class="bg-white rounded-2xl premium-shadow p-8 md:p-12">
+        <form id="jobApplicationForm" class="space-y-8" onsubmit="submitApplication(event)">
+          <!-- Section 1: Personal Information -->
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+              <i class="fas fa-user text-primary text-2xl"></i> Personal Information
+            </h2>
+            <div class="space-y-4">
+              <!-- Name -->
+              <div>
+                <label for="name" class="block text-sm font-bold text-slate-900 mb-2">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Sonu Kumar Suman" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                <p id="nameError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="nameSuccess" class="mt-1 text-xs text-green-600 hidden">Looks good.</p>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-sm font-bold text-slate-900 mb-2">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                <p id="emailError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="emailSuccess" class="mt-1 text-xs text-green-600 hidden">Valid email.</p>
+              </div>
+
+              <!-- Phone Number with Country Code -->
+              <div>
+                <label for="phone" class="block text-sm font-bold text-slate-900 mb-2">Phone Number *</label>
+                <div class="flex gap-2">
+                  <input type="text" value="+91" disabled class="w-16 px-4 py-3 border-2 border-slate-300 rounded-lg bg-slate-100 font-semibold text-slate-900">
+                  <input type="tel" id="phone" name="phone" required placeholder="98765-43210" class="flex-1 px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                </div>
+                <p id="phoneError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="phoneSuccess" class="mt-1 text-xs text-green-600 hidden">Valid phone.</p>
+              </div>
+
+              <!-- Date of Birth -->
+              <div>
+                <label for="dob" class="block text-sm font-bold text-slate-900 mb-2">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" required class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                <p id="dobError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="dobSuccess" class="mt-1 text-xs text-green-600 hidden">Looks good.</p>
+              </div>
+
+              <!-- Location -->
+              <div>
+                <label for="location" class="block text-sm font-bold text-slate-900 mb-2">Current Location *</label>
+                <input type="text" id="location" name="location" required placeholder="Bengaluru, Karnataka" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                <button type="button" id="detectApplyLocationBtn" class="mt-2 text-xs font-semibold text-primary hover:text-blue-700 transition flex items-center gap-2">
+                  <i class="fas fa-location-crosshairs"></i> Use my current location
+                </button>
+                <p id="locationError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="locationSuccess" class="mt-1 text-xs text-green-600 hidden">Location set.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Professional Details -->
+          <div class="border-t pt-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+              <i class="fas fa-briefcase text-primary text-2xl"></i> Professional Details
+            </h2>
+            <div class="space-y-4">
+              <!-- Position Applying For -->
+              <div>
+                <label for="position" class="block text-sm font-bold text-slate-900 mb-2">Position Applying For</label>
+                <input type="text" id="position" name="position" placeholder="e.g., Senior Software Engineer" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+              </div>
+
+              <!-- Years of Experience -->
+              <div>
+                <label for="experience" class="block text-sm font-bold text-slate-900 mb-2">Years of Experience *</label>
+                <select id="experience" name="experience" required class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                  <option value="">Select experience</option>
+                  <option value="0-1">0-1 years</option>
+                  <option value="1-3">1-3 years</option>
+                  <option value="3-5">3-5 years</option>
+                  <option value="5-10">5-10 years</option>
+                  <option value="10+">10+ years</option>
+                </select>
+                <p id="experienceError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="experienceSuccess" class="mt-1 text-xs text-green-600 hidden">Looks good.</p>
+              </div>
+
+              <!-- Skills -->
+              <div>
+                <label for="skills" class="block text-sm font-bold text-slate-900 mb-2">Key Skills *</label>
+                <textarea id="skills" name="skills" required placeholder="e.g., Python, JavaScript, Data Analysis, Project Management" rows="3" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+                <p id="skillsError" class="mt-1 text-xs text-red-600 hidden"></p>
+                <p id="skillsSuccess" class="mt-1 text-xs text-green-600 hidden">Looks good.</p>
+              </div>
+
+              <!-- Cover Letter -->
+              <div>
+                <label for="coverLetter" class="block text-sm font-bold text-slate-900 mb-2">Cover Letter</label>
+                <textarea id="coverLetter" name="coverLetter" placeholder="Tell us why you're interested in this position..." rows="4" class="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Resume Upload -->
+          <div class="border-t pt-8">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+              <i class="fas fa-file-pdf text-primary text-2xl"></i> Upload Resume
+            </h2>
+            
+            <!-- File Upload -->
+            <div class="border-2 border-dashed border-primary rounded-xl p-8 text-center hover:bg-primary/5 transition cursor-pointer" onclick="document.getElementById('resume').click()">
+              <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" style="display:none;" onchange="updateFileName(this)">
+              <i class="fas fa-cloud-upload-alt text-4xl text-primary mb-4"></i>
+              <p class="text-lg font-semibold text-slate-900 mb-1">Drop your resume here or click to browse</p>
+              <p class="text-sm text-slate-600">Supported formats: PDF, DOC, DOCX (Max 5MB)</p>
+              <p class="text-sm text-primary font-semibold mt-3" id="fileName"></p>
+            </div>
+          </div>
+
+          <!-- Agreement -->
+          <div class="border-t pt-8">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="agree" name="agree" required class="w-5 h-5 mt-1 accent-primary">
+              <span class="text-sm text-slate-700">
+                I confirm that the information provided is true and accurate. I understand that any false information may result in disqualification from consideration.
+                <a href="#" class="text-primary hover:underline">Terms & Conditions</a>
+              </span>
+            </label>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-4 pt-8">
+            <a href="home.html" class="flex-1 py-3 border-2 border-slate-300 text-slate-900 font-bold rounded-lg hover:border-primary hover:text-primary transition text-center">
+              Back to Jobs
+            </a>
+            <button type="submit" class="flex-1 py-3 gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success Message with Rating -->
+      <div id="successMessage" class="hidden mt-8 p-8 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-500 rounded-xl text-center">
+        <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+        <h3 class="text-3xl font-bold text-green-900 mb-2">🎉 Application Submitted Successfully!</h3>
+        <p class="text-green-700 mb-6 text-lg">Your application has been submitted. You'll receive updates at the provided email address.</p>
+        
+        <!-- Job Rating Section -->
+        <div class="bg-white rounded-lg p-6 mb-6 inline-block max-w-md">
+          <p class="text-slate-900 font-bold mb-4">How would you rate this job listing?</p>
+          <div class="flex justify-center gap-3 mb-4">
+            <button onclick="submitRating(1)" class="text-3xl opacity-50 hover:opacity-100 transition">⭐</button>
+            <button onclick="submitRating(2)" class="text-3xl opacity-50 hover:opacity-100 transition">⭐</button>
+            <button onclick="submitRating(3)" class="text-3xl opacity-50 hover:opacity-100 transition">⭐</button>
+            <button onclick="submitRating(4)" class="text-3xl opacity-50 hover:opacity-100 transition">⭐</button>
+            <button onclick="submitRating(5)" class="text-3xl opacity-50 hover:opacity-100 transition">⭐</button>
+          </div>
+          <p class="text-sm text-slate-600">Your feedback helps us improve</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="home.html" class="px-8 py-3 gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fas fa-briefcase"></i> View More Jobs
+          </a>
+          <button onclick="shareSuccessLinkedIn()" class="px-8 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition flex items-center justify-center gap-2">
+            <i class="fab fa-linkedin"></i> Share on LinkedIn
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-gray-300 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-rocket text-cyan-400"></i>
+            CareerHub
+          </h4>
+          <p class="text-sm">India's #1 Premium Job Portal</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Quick Links</h4>
+          <ul class="text-sm space-y-2">
+            <li><a href="index.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Home</a></li>
+            <li><a href="home.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Jobs</a></li>
+            <li><a href="apply.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Apply</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Support</h4>
+          <ul class="text-sm space-y-2">
+            <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Follow Us</h4>
+          <div class="flex gap-4 text-lg">
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-slate-700 pt-8 text-center">
+        <p>&copy; 2026 CareerHub. All rights reserved. | Made for India's Job Seekers</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        const fileName = input.files[0].name;
+        const fileSize = (input.files[0].size / 1024).toFixed(2);
+        document.getElementById('fileName').textContent = `✓ ${fileName} (${fileSize} KB)`;
+      }
+    }
+
+    function setFieldError(fieldId, message) {
+      const input = document.getElementById(fieldId);
+      const errorEl = document.getElementById(`${fieldId}Error`);
+      const successEl = document.getElementById(`${fieldId}Success`);
+      if (input) {
+        input.classList.add('border-red-500');
+        input.classList.remove('border-slate-300');
+        input.classList.remove('border-green-500');
+      }
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+      if (successEl) {
+        successEl.classList.add('hidden');
+      }
+    }
+
+    function clearFieldError(fieldId) {
+      const input = document.getElementById(fieldId);
+      const errorEl = document.getElementById(`${fieldId}Error`);
+      const successEl = document.getElementById(`${fieldId}Success`);
+      if (input) {
+        input.classList.remove('border-red-500');
+        if (!input.classList.contains('border-slate-300')) {
+          input.classList.add('border-slate-300');
+        }
+        input.classList.remove('border-green-500');
+      }
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+      if (successEl) {
+        successEl.classList.add('hidden');
+      }
+    }
+
+    function setFieldSuccess(fieldId, message = 'Looks good.') {
+      const input = document.getElementById(fieldId);
+      const errorEl = document.getElementById(`${fieldId}Error`);
+      const successEl = document.getElementById(`${fieldId}Success`);
+      if (input) {
+        input.classList.remove('border-red-500');
+        input.classList.remove('border-slate-300');
+        input.classList.add('border-green-500');
+      }
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+      if (successEl) {
+        successEl.textContent = message;
+        successEl.classList.remove('hidden');
+      }
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isValidPhone(phone) {
+      return /^[0-9]{10}$/.test(phone.replace(/[^0-9]/g, ''));
+    }
+
+    function validateField(fieldId) {
+      const value = (document.getElementById(fieldId)?.value || '').trim();
+
+      if (fieldId === 'name') {
+        if (!value || value.length < 3) return setFieldError('name', 'Please enter your full name (min 3 characters).');
+        return setFieldSuccess('name');
+      }
+      if (fieldId === 'email') {
+        if (!value || !isValidEmail(value)) return setFieldError('email', 'Please enter a valid email address.');
+        return setFieldSuccess('email', 'Valid email.');
+      }
+      if (fieldId === 'phone') {
+        if (!value || !isValidPhone(value)) return setFieldError('phone', 'Please enter a valid 10-digit phone number.');
+        return setFieldSuccess('phone', 'Valid phone.');
+      }
+      if (fieldId === 'dob') {
+        if (!value) return setFieldError('dob', 'Please select your date of birth.');
+        return setFieldSuccess('dob');
+      }
+      if (fieldId === 'location') {
+        if (!value || value.length < 2) return setFieldError('location', 'Please enter your current location.');
+        return setFieldSuccess('location', 'Location set.');
+      }
+      if (fieldId === 'experience') {
+        if (!value) return setFieldError('experience', 'Please select your years of experience.');
+        return setFieldSuccess('experience');
+      }
+      if (fieldId === 'skills') {
+        if (!value || value.length < 5) return setFieldError('skills', 'Please list your key skills (min 5 characters).');
+        return setFieldSuccess('skills');
+      }
+    }
+
+    function validateForm() {
+      let isValid = true;
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const dob = document.getElementById('dob').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const experience = document.getElementById('experience').value.trim();
+      const skills = document.getElementById('skills').value.trim();
+
+      clearFieldError('name');
+      clearFieldError('email');
+      clearFieldError('phone');
+      clearFieldError('dob');
+      clearFieldError('location');
+      clearFieldError('experience');
+      clearFieldError('skills');
+
+      if (!name || name.length < 3) {
+        setFieldError('name', 'Please enter your full name (min 3 characters).');
+        isValid = false;
+      } else {
+        setFieldSuccess('name');
+      }
+
+      if (!email || !isValidEmail(email)) {
+        setFieldError('email', 'Please enter a valid email address.');
+        isValid = false;
+      } else {
+        setFieldSuccess('email', 'Valid email.');
+      }
+
+      if (!phone || !isValidPhone(phone)) {
+        setFieldError('phone', 'Please enter a valid 10-digit phone number.');
+        isValid = false;
+      } else {
+        setFieldSuccess('phone', 'Valid phone.');
+      }
+
+      if (!dob) {
+        setFieldError('dob', 'Please select your date of birth.');
+        isValid = false;
+      } else {
+        setFieldSuccess('dob');
+      }
+
+      if (!location || location.length < 2) {
+        setFieldError('location', 'Please enter your current location.');
+        isValid = false;
+      } else {
+        setFieldSuccess('location', 'Location set.');
+      }
+
+      if (!experience) {
+        setFieldError('experience', 'Please select your years of experience.');
+        isValid = false;
+      } else {
+        setFieldSuccess('experience');
+      }
+
+      if (!skills || skills.length < 5) {
+        setFieldError('skills', 'Please list your key skills (min 5 characters).');
+        isValid = false;
+      } else {
+        setFieldSuccess('skills');
+      }
+
+      return isValid;
+    }
+
+    function submitApplication(event) {
+      event.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+      
+      // Get form data
+      const lastApplyJob = JSON.parse(localStorage.getItem('lastApplyJob') || 'null');
+      const positionValue = document.getElementById('position').value;
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        dob: document.getElementById('dob').value,
+        location: document.getElementById('location').value,
+        position: positionValue || (lastApplyJob?.title || ''),
+        company: lastApplyJob?.company || '',
+        jobId: lastApplyJob?.jobId || null,
+        experience: document.getElementById('experience').value,
+        skills: document.getElementById('skills').value,
+        coverLetter: document.getElementById('coverLetter').value,
+        status: 'applied',
+        appliedAt: new Date().toISOString(),
+        timestamp: new Date().toISOString()
+      };
+      
+      // Save to localStorage
+      let applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+      applications.push(formData);
+      localStorage.setItem('jobApplications', JSON.stringify(applications));
+
+      // Update application tracking to real "applied" status
+      if (lastApplyJob && lastApplyJob.jobId) {
+        let tracking = JSON.parse(localStorage.getItem('applicationTracking')) || [];
+        const now = new Date().toISOString();
+        const existing = tracking.find(t => t.jobId === lastApplyJob.jobId);
+        if (existing) {
+          existing.status = 'applied';
+          existing.appliedAt = now;
+          existing.updatedAt = now;
+        } else {
+          tracking.push({
+            jobId: lastApplyJob.jobId,
+            title: lastApplyJob.title,
+            company: lastApplyJob.company,
+            status: 'applied',
+            appliedAt: now,
+            updatedAt: now
+          });
+        }
+        localStorage.setItem('applicationTracking', JSON.stringify(tracking));
+
+        let appliedJobs = JSON.parse(localStorage.getItem('appliedJobs')) || [];
+        if (!appliedJobs.includes(lastApplyJob.jobId)) {
+          appliedJobs.push(lastApplyJob.jobId);
+          localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+        }
+        localStorage.removeItem('lastApplyJob');
+      }
+      
+      // Show success message
+      document.getElementById('jobApplicationForm').style.display = 'none';
+      document.getElementById('successMessage').classList.remove('hidden');
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load job information into the info card
+      const lastApplyJob = JSON.parse(localStorage.getItem('lastApplyJob') || 'null');
+      if (lastApplyJob) {
+        document.getElementById('jobTitleText').textContent = lastApplyJob.title || 'Position';
+        document.getElementById('jobCompanyNameText').textContent = lastApplyJob.company || 'Company';
+        if (lastApplyJob.logo) {
+          const logoImg = document.getElementById('jobLogo');
+          logoImg.src = lastApplyJob.logo;
+          logoImg.onerror = () => {
+            logoImg.src = `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 48%22%3E%3Crect fill=%22%230066cc%22 width=%2248%22 height=%2248%22/%3E%3Ctext x=%2224%22 y=%2232%22 font-size=%2224%22 fill=%22white%22 text-anchor=%22middle%22 font-weight=%22bold%22%3E${lastApplyJob.company.charAt(0)}%3C/text%3E%3C/svg%3E`;
+          };
+        }
+      }
+
+      ['name','email','phone','dob','location','experience','skills'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', () => validateField(id));
+        el.addEventListener('blur', () => validateField(id));
+      });
+    });
+
+    function submitRating(stars) {
+      let ratings = JSON.parse(localStorage.getItem('jobListingRatings')) || [];
+      ratings.push({
+        stars: stars,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('jobListingRatings', JSON.stringify(ratings));
+      
+      // Update UI
+      document.querySelectorAll('.fa-star').forEach((star, index) => {
+        if (index < stars) {
+          star.style.color = '#fbbf24';
+        }
+      });
+    }
+
+    function shareSuccessLinkedIn() {
+      const text = "I just successfully applied to an amazing job opportunity on CareerHub! 🚀 Join me on my journey to find the perfect career fit. #Hiring #CareerGrowth #Jobs";
+      const url = "https://careerhub.in";
+      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+      window.open(linkedinUrl, '_blank');
+    }
+  </script>
+  <script src="auth.js"></script>
+</body>
+</html>

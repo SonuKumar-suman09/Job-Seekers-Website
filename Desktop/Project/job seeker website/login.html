@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - CareerHub</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#0066cc',
+                    secondary: '#00d4ff',
+                }
+            }
+        }
+    }
+  </script>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .gradient-primary { background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%); }
+  </style>
+</head>
+<body class="bg-slate-50">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700/50">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 text-white font-bold text-xl hover:text-blue-400 transition">
+          <i class="fas fa-rocket text-cyan-400"></i>
+          <span>CareerHub</span>
+        </a>
+        
+        <div class="hidden md:flex gap-8">
+          <a href="index.html" class="text-gray-300 hover:text-white transition">Home</a>
+          <a href="home.html" class="text-gray-300 hover:text-white transition">Jobs</a>
+        </div>
+        
+        <a href="create-account.html" class="px-4 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-lg transition">
+          Sign Up
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="min-h-screen flex items-center justify-center py-12 px-4">
+    <div class="max-w-md w-full">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full gradient-primary flex items-center justify-center">
+          <i class="fas fa-user text-4xl text-white"></i>
+        </div>
+        <h1 class="text-4xl font-bold text-slate-900 mb-2">Welcome Back</h1>
+        <p class="text-slate-600">Log in to continue your job search</p>
+      </div>
+
+      <!-- Login Form -->
+      <div class="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+        <form id="loginForm" class="space-y-4">
+          <!-- Full Name -->
+          <div>
+            <label for="fullname" class="block text-sm font-semibold text-slate-900 mb-2">Full Name</label>
+            <div class="relative">
+              <i class="fas fa-user absolute left-3 top-3.5 text-slate-400"></i>
+              <input type="text" id="fullname" name="fullname" placeholder="Sonu Kumar Suman" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" value="Sonu Kumar Suman">
+            </div>
+          </div>
+
+          <!-- Email/Username -->
+          <div>
+            <label for="username" class="block text-sm font-semibold text-slate-900 mb-2">Email or Username *</label>
+            <div class="relative">
+              <i class="fas fa-user absolute left-3 top-3.5 text-slate-400"></i>
+              <input type="text" id="username" name="username" required placeholder="sonu" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" value="sonu">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="password" class="block text-sm font-semibold text-slate-900 mb-2">Password *</label>
+            <div class="relative">
+              <i class="fas fa-lock absolute left-3 top-3.5 text-slate-400"></i>
+              <input type="password" id="password" name="password" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" value="suman">
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="w-4 h-4 rounded">
+              <span class="text-slate-700">Remember me</span>
+            </label>
+            <a href="#" id="forgotPasswordLink" class="text-blue-600 hover:underline font-semibold">Forgot password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="w-full py-3 gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition transform hover:scale-105">
+            <i class="fas fa-sign-in-alt mr-2"></i>Login
+          </button>
+        </form>
+
+        <!-- Error Message -->
+        <div id="error-msg" class="hidden p-4 bg-red-50 border border-red-200 rounded-lg">
+          <div class="flex items-start gap-2">
+            <i class="fas fa-exclamation-circle text-red-600 text-xl flex-shrink-0 mt-0.5"></i>
+            <span class="text-red-700 font-semibold text-sm" id="errorText"></span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-4">
+          <div class="flex-1 h-px bg-slate-200"></div>
+          <span class="text-xs text-slate-500">OR</span>
+          <div class="flex-1 h-px bg-slate-200"></div>
+        </div>
+
+        <!-- Google Login -->
+        <div id="googleSignInBtn" class="flex justify-center"></div>
+        <p class="text-xs text-center text-slate-500">Sign in with your Google account</p>
+      </div>
+
+      <!-- Forgot Password Modal -->
+      <div id="forgotPasswordModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+          <div class="bg-gradient-to-r from-blue-600 to-cyan-500 p-6 flex items-center justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-white">Reset Password</h3>
+              <p class="text-blue-100 text-sm">Update your account password</p>
+            </div>
+            <button type="button" id="forgotPasswordClose" class="text-white text-2xl hover:scale-110 transition">×</button>
+          </div>
+          <div class="p-6">
+            <form id="forgotPasswordForm" class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-slate-900 mb-2">Email Address</label>
+                <input type="email" id="forgotEmail" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="you@example.com" required>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-900 mb-2">New Password</label>
+                <input type="password" id="forgotNewPassword" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="Minimum 8 characters" required>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-900 mb-2">Confirm Password</label>
+                <input type="password" id="forgotConfirmPassword" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" placeholder="Re-enter password" required>
+              </div>
+              <div id="forgotPasswordMsg" class="hidden p-3 rounded-lg text-sm font-semibold"></div>
+              <div class="flex gap-3 pt-2">
+                <button type="button" id="forgotCancel" class="flex-1 px-4 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition">Cancel</button>
+                <button type="submit" class="flex-1 px-4 py-3 gradient-primary text-white font-bold rounded-lg hover:shadow-lg transition">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sign Up Link -->
+      <div class="text-center mt-6">
+        <p class="text-slate-600">
+          Don't have an account? 
+          <a href="create-account.html" class="text-blue-600 font-semibold hover:underline">Create one</a>
+        </p>
+      </div>
+
+      <!-- Security Info -->
+      <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+        <div class="flex gap-3">
+          <i class="fas fa-shield text-blue-600 text-lg mt-0.5"></i>
+          <div>
+            <p class="text-sm font-semibold text-blue-900">Secure Login</p>
+            <p class="text-xs text-blue-700">Your information is encrypted and protected</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-gray-300 py-8 text-center">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="text-sm">&copy; 2026 CareerHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
+
+	
+	
+	
+	
+		

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CareerHub - Premium Career Opportunities Platform for India">
+    <title>CareerHub - Find Your Dream Job in India | Premium Opportunities</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0066cc',
+                        secondary: '#00d4ff',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Poppins', sans-serif; }
+        .gradient-primary { background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%); }
+        .gradient-accent { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-warm { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes slideUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 204, 0.3); } 50% { box-shadow: 0 0 40px rgba(0, 102, 204, 0.6); } }
+        
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-slide-up { animation: slideUp 0.6s ease-out; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        
+        .glass-effect { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .premium-shadow { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); }
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2); }
+        
+        /* Company Logos Carousel - Full HD & 4K Optimized */
+        .company-logos-container {
+            position: relative;
+            overflow: hidden;
+            padding: 50px 20px;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 5%, rgba(255,255,255,1) 95%, rgba(255,255,255,0) 100%);
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .company-logos-track {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 100px;
+            animation: scrollLogos 60s linear infinite;
+            width: fit-content;
+            will-change: transform;
+            padding: 10px 0;
+        }
+        
+        .company-logo {
+            height: 60px;
+            width: auto;
+            max-width: 160px;
+            min-width: 80px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0) opacity(0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        
+        .company-logo-img {
+            height: 85px;
+            width: auto;
+            max-width: 200px;
+            min-width: 120px;
+            object-fit: contain;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            cursor: pointer;
+            image-rendering: high-quality;
+            image-rendering: crisp-edges;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .company-logo-img:hover {
+            transform: scale(1.18) translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .company-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            height: 50px;
+            min-width: 140px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0066cc, #0052cc);
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        .company-badge:hover {
+            opacity: 1;
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .company-logo:hover {
+            filter: grayscale(0%) brightness(1) opacity(1);
+            transform: scale(1.15) translateY(-5px);
+        }
+        
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .company-logos-container:hover .company-logos-track {
+            animation-play-state: paused;
+        }
+        
+        /* Gradient fade on edges - High-res optimized */
+        .company-logos-container::before,
+        .company-logos-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 180px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .company-logos-container::before {
+            left: 0;
+            background: linear-gradient(to right, white, transparent);
+        }
+        
+        .company-logos-container::after {
+            right: 0;
+            background: linear-gradient(to left, white, transparent);
+        }
+        
+        @media (max-width: 1440px) {
+            .company-logo-img {
+                height: 75px;
+                max-width: 180px;
+                min-width: 110px;
+                padding: 10px 12px;
+            }
+            .company-logos-track {
+                gap: 80px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .company-logos-container {
+                padding: 35px 15px;
+                min-height: 110px;
+            }
+            .company-logo-img {
+                height: 60px;
+                max-width: 140px;
+                min-width: 90px;
+                padding: 8px 10px;
+                border-radius: 10px;
+            }
+            .company-logos-track {
+                gap: 50px;
+                animation-duration: 45s;
+            }
+            .company-logos-container::before,
+            .company-logos-container::after {
+                width: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .company-logos-container {
+                padding: 25px 10px;
+                min-height: 90px;
+            }
+            .company-logo-img {
+                height: 48px;
+                max-width: 120px;
+                min-width: 75px;
+                padding: 6px 8px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+            .company-logos-track {
+                gap: 35px;
+                animation-duration: 40s;
+            }
+            .company-logos-container::before,
+            .company-logos-container::after {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-50 to-slate-100">
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 premium-shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo with Badge -->
+                <a href="#home" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-xl text-slate-900">CareerHub</span>
+                        <p class="text-xs text-slate-600">India's #1 Job Portal</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex gap-10">
+                    <a href="index.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+                        <i class="fas fa-home text-primary"></i> Home
+                    </a>
+                    <a href="home.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+                        <i class="fas fa-briefcase text-cyan-500"></i> Jobs
+                    </a>
+                    <a href="dashboard.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+                        <i class="fas fa-chart-line text-emerald-500"></i> Dashboard
+                    </a>
+                    <a href="#companies" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+                        <i class="fas fa-building text-blue-500"></i> Companies
+                    </a>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div id="authContainer" class="flex items-center gap-4">
+                    <button class="p-2 hover:bg-slate-100 rounded-lg transition text-slate-600 hover:text-primary">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="login.html" class="px-6 py-2 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition">
+                        Login
+                    </a>
+                    <a href="create-account.html" class="px-6 py-2 gradient-primary text-white font-semibold rounded-lg hover:shadow-lg transition hidden sm:block">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Enhanced -->
+    <section id="home" class="relative min-h-screen gradient-primary flex items-center justify-center overflow-hidden pt-20">
+        <!-- Animated Background -->
+        <div class="absolute top-40 right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 left-10 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 right-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 relative z-10 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white">
+                    <div class="inline-block mb-6 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30">
+                        <span class="text-sm font-semibold flex items-center gap-2">
+                            <i class="fas fa-lightning-bolt text-yellow-300"></i>
+                            Your Career Journey Starts Here
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                        Find Your <span class="bg-gradient-to-r from-cyan-200 to-white bg-clip-text text-transparent">Dream Job</span> Today
+                    </h1>
+                    
+                    <p class="text-xl text-blue-100 mb-4 leading-relaxed">
+                        Discover 50,000+ premium job opportunities across India. From startups to Fortune 500 companies, we connect you with roles that match your expertise and aspirations.
+                    </p>
+                    
+                    <p class="text-lg text-blue-50 mb-8 leading-relaxed">
+                        Whether you're in Bengaluru, Hyderabad, Delhi, or any city across India - your next opportunity is just one click away.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <a href="home.html" class="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:bg-blue-50 transition transform hover:scale-105 shadow-lg flex items-center gap-2">
+                            <i class="fas fa-search"></i> Explore 50K+ Jobs
+                        </a>
+                        <a href="#companies" class="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/20 transition flex items-center gap-2">
+                            <i class="fas fa-building"></i> Top Companies
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-300"></i>
+                            </div>
+                            <span>Verified Companies</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-300"></i>
+                            </div>
+                            <span>Secure Platform</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-300"></i>
+                            </div>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Visual Section -->
+                <div class="hidden lg:block relative h-96">
+                    <!-- Floating Card 1 -->
+                    <div class="absolute top-0 right-0 glass-effect p-6 rounded-2xl border border-white/30 animate-float" style="animation-delay: 0s;">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                                <i class="fas fa-briefcase text-cyan-300"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-white">50K+</p>
+                                <p class="text-xs text-blue-100">Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Card 2 -->
+                    <div class="absolute top-48 left-0 glass-effect p-6 rounded-2xl border border-white/30 animate-float" style="animation-delay: 0.5s;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                                <i class="fas fa-users text-blue-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-white">2.5L+</p>
+                                <p class="text-xs text-blue-100">Professionals</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Card 3 -->
+                    <div class="absolute bottom-0 right-12 glass-effect p-6 rounded-2xl border border-white/30 animate-float animate-pulse-glow" style="animation-delay: 1s;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center text-2xl">
+                                <i class="fas fa-star text-yellow-300"></i>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-white">4.9/5</p>
+                                <p class="text-xs text-blue-100">Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Companies Section -->
+    <section id="companies" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-check-circle"></i>
+                    <span>25+ Top Companies</span>
+                </div>
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">Trusted by India's Leading Companies</h2>
+                <p class="text-xl text-slate-600">Join thousands of professionals working at top Indian and global organizations</p>
+            </div>
+            
+            <!-- Company Logos Carousel -->
+            <div class="company-logos-container mb-12">
+                <div class="company-logos-track">
+                    <!-- Real company logos with intelligent multi-layer fallback system -->
+                    <img src="https://logo.clearbit.com/infosys.com" alt="Infosys" class="company-logo-img" data-domain="infosys.com" onerror="if(this.dataset.fallbackAttempt===undefined){this.dataset.fallbackAttempt=0}handleLogoError(this, 'Infosys', 'infosys.com')">
+                    <img src="https://logo.clearbit.com/wipro.com" alt="Wipro" class="company-logo-img" data-domain="wipro.com" onerror="handleLogoError(this, 'Wipro', 'wipro.com')">
+                    <img src="https://logo.clearbit.com/tcs.com" alt="TCS" class="company-logo-img" data-domain="tcs.com" onerror="handleLogoError(this, 'TCS', 'tcs.com')">
+                    <img src="https://logo.clearbit.com/zomato.com" alt="Zomato" class="company-logo-img" data-domain="zomato.com" onerror="handleLogoError(this, 'Zomato', 'zomato.com')">
+                    <img src="https://logo.clearbit.com/paytm.com" alt="Paytm" class="company-logo-img" data-domain="paytm.com" onerror="handleLogoError(this, 'Paytm', 'paytm.com')">
+                    <img src="https://logo.clearbit.com/phonepe.com" alt="PhonePe" class="company-logo-img" data-domain="phonepe.com" onerror="handleLogoError(this, 'PhonePe', 'phonepe.com')">
+                    <img src="https://logo.clearbit.com/cred.club" alt="CRED" class="company-logo-img" data-domain="cred.club" onerror="handleLogoError(this, 'CRED', 'cred.club')">
+                    <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="company-logo-img" data-domain="flipkart.com" onerror="handleLogoError(this, 'Flipkart', 'flipkart.com')">
+                    <img src="https://logo.clearbit.com/olacabs.com" alt="Ola" class="company-logo-img" data-domain="olacabs.com" onerror="handleLogoError(this, 'Ola', 'olacabs.com')">
+                    <img src="https://logo.clearbit.com/freshworks.com" alt="Freshworks" class="company-logo-img" data-domain="freshworks.com" onerror="handleLogoError(this, 'Freshworks', 'freshworks.com')">
+                    <img src="https://logo.clearbit.com/dream11.com" alt="Dream11" class="company-logo-img" data-domain="dream11.com" onerror="handleLogoError(this, 'Dream11', 'dream11.com')">
+                    <img src="https://logo.clearbit.com/zerodha.com" alt="Zerodha" class="company-logo-img" data-domain="zerodha.com" onerror="handleLogoError(this, 'Zerodha', 'zerodha.com')">
+                    <img src="https://logo.clearbit.com/myntra.com" alt="Myntra" class="company-logo-img" data-domain="myntra.com" onerror="handleLogoError(this, 'Myntra', 'myntra.com')">
+                    <img src="https://logo.clearbit.com/bigbasket.com" alt="BigBasket" class="company-logo-img" data-domain="bigbasket.com" onerror="handleLogoError(this, 'BigBasket', 'bigbasket.com')">
+                    <img src="https://logo.clearbit.com/byjus.com" alt="Byju's" class="company-logo-img" data-domain="byjus.com" onerror="handleLogoError(this, 'Byjus', 'byjus.com')">
+                    <img src="https://logo.clearbit.com/techmahindra.com" alt="Tech Mahindra" class="company-logo-img" data-domain="techmahindra.com" onerror="handleLogoError(this, 'TechMahindra', 'techmahindra.com')">
+                    <img src="https://logo.clearbit.com/hcltech.com" alt="HCL" class="company-logo-img" data-domain="hcltech.com" onerror="handleLogoError(this, 'HCL', 'hcltech.com')">
+                    <img src="https://logo.clearbit.com/nykaa.com" alt="Nykaa" class="company-logo-img" data-domain="nykaa.com" onerror="handleLogoError(this, 'Nykaa', 'nykaa.com')">
+                    <img src="https://logo.clearbit.com/policybazaar.com" alt="PolicyBazaar" class="company-logo-img" data-domain="policybazaar.com" onerror="handleLogoError(this, 'PolicyBazaar', 'policybazaar.com')">
+                    <img src="https://logo.clearbit.com/amazon.in" alt="Amazon India" class="company-logo-img" data-domain="amazon.in" onerror="handleLogoError(this, 'Amazon', 'amazon.in')">
+                    <img src="https://logo.clearbit.com/swiggy.com" alt="Swiggy" class="company-logo-img" data-domain="swiggy.com" onerror="handleLogoError(this, 'Swiggy', 'swiggy.com')">
+                    <img src="https://logo.clearbit.com/uber.com" alt="Uber" class="company-logo-img" data-domain="uber.com" onerror="handleLogoError(this, 'Uber', 'uber.com')">
+                    <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="company-logo-img" data-domain="microsoft.com" onerror="handleLogoError(this, 'Microsoft', 'microsoft.com')">
+                    <img src="https://logo.clearbit.com/google.com" alt="Google" class="company-logo-img" data-domain="google.com" onerror="handleLogoError(this, 'Google', 'google.com')">
+                    <img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="company-logo-img" data-domain="accenture.com" onerror="handleLogoError(this, 'Accenture', 'accenture.com')">
+                    
+                    <!-- Duplicate for seamless loop -->
+                    <img src="https://logo.clearbit.com/infosys.com" alt="Infosys" class="company-logo-img" data-domain="infosys.com" onerror="handleLogoError(this, 'Infosys', 'infosys.com')">
+                    <img src="https://logo.clearbit.com/wipro.com" alt="Wipro" class="company-logo-img" data-domain="wipro.com" onerror="handleLogoError(this, 'Wipro', 'wipro.com')">
+                    <img src="https://logo.clearbit.com/tcs.com" alt="TCS" class="company-logo-img" data-domain="tcs.com" onerror="handleLogoError(this, 'TCS', 'tcs.com')">
+                    <img src="https://logo.clearbit.com/zomato.com" alt="Zomato" class="company-logo-img" data-domain="zomato.com" onerror="handleLogoError(this, 'Zomato', 'zomato.com')">
+                    <img src="https://logo.clearbit.com/paytm.com" alt="Paytm" class="company-logo-img" data-domain="paytm.com" onerror="handleLogoError(this, 'Paytm', 'paytm.com')">
+                    <img src="https://logo.clearbit.com/phonepe.com" alt="PhonePe" class="company-logo-img" data-domain="phonepe.com" onerror="handleLogoError(this, 'PhonePe', 'phonepe.com')">
+                    <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="company-logo-img" data-domain="flipkart.com" onerror="handleLogoError(this, 'Flipkart', 'flipkart.com')">
+                    <img src="https://logo.clearbit.com/olacabs.com" alt="Ola" class="company-logo-img" data-domain="olacabs.com" onerror="handleLogoError(this, 'Ola', 'olacabs.com')">
+                    <img src="https://logo.clearbit.com/swiggy.com" alt="Swiggy" class="company-logo-img" data-domain="swiggy.com" onerror="handleLogoError(this, 'Swiggy', 'swiggy.com')">
+                    <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft" class="company-logo-img" data-domain="microsoft.com" onerror="handleLogoError(this, 'Microsoft', 'microsoft.com')">
+                </div>
+            </div>
+
+            <!-- Company Stats Section -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
+                <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">50,000+</div>
+                    <div class="text-slate-600 font-medium">Active Jobs</div>
+                    <p class="text-xs text-slate-500 mt-1">Updated daily from top companies</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">2,500+</div>
+                    <div class="text-slate-600 font-medium">Partner Companies</div>
+                    <p class="text-xs text-slate-500 mt-1">Leading Indian & multinational firms</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-100">
+                    <div class="text-4xl font-bold text-green-600 mb-2">1M+</div>
+                    <div class="text-slate-600 font-medium">Job Seekers</div>
+                    <p class="text-xs text-slate-500 mt-1">Professionals trust our platform</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl border border-orange-100">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">95%</div>
+                    <div class="text-slate-600 font-medium">Success Rate</div>
+                    <p class="text-xs text-slate-500 mt-1">Job placements in 90 days</p>
+                </div>
+            </div>
+
+            <!-- Why Top Companies Choose Us -->
+            <div class="mt-16 bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl p-8 md:p-12">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">Why India's Top Companies Partner With Us</h3>
+                    <p class="text-slate-600 max-w-2xl mx-auto">We connect talented professionals with leading organizations across India</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-users text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2">Quality Talent Pool</h4>
+                        <p class="text-sm text-slate-600">Pre-verified candidates from top engineering colleges and universities across India</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-bolt text-2xl text-purple-600"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2">Fast Hiring Process</h4>
+                        <p class="text-sm text-slate-600">AI-powered matching reduces hiring time by 60% with instant candidate recommendations</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-shield-alt text-2xl text-green-600"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900 mb-2">Trusted Platform</h4>
+                        <p class="text-sm text-slate-600">Background verified profiles with skill assessments and certifications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="features" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">Why CareerHub?</h2>
+                <p class="text-xl text-slate-600">Everything you need for a successful job search</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-hover group bg-white p-8 rounded-2xl border border-slate-200 premium-shadow">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-2xl text-white">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Pan-India Coverage</h3>
+                        <p class="text-slate-600 leading-relaxed">Access jobs from Bengaluru, Delhi, Mumbai, Hyderabad, and 500+ cities across India.</p>
+                    <p class="text-sm text-blue-600 font-semibold mt-4 flex items-center gap-2">
+                        <i class="fas fa-arrow-right"></i> 50,000+ active listings
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="card-hover group bg-white p-8 rounded-2xl border border-slate-200 premium-shadow">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-2xl text-white">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Competitive Salaries</h3>
+                    <p class="text-slate-600 leading-relaxed">₹3 LPA to ₹50+ LPA opportunities for all experience levels and skill sets.</p>
+                    <p class="text-sm text-green-600 font-semibold mt-4 flex items-center gap-2">
+                        <i class="fas fa-arrow-right"></i> Transparent salary ranges
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="card-hover group bg-white p-8 rounded-2xl border border-slate-200 premium-shadow">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-2xl text-white">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3">Career Growth</h3>
+                    <p class="text-slate-600 leading-relaxed">From startups to Fortune 500 - find roles that accelerate your professional growth.</p>
+                    <p class="text-sm text-purple-600 font-semibold mt-4 flex items-center gap-2">
+                        <i class="fas fa-arrow-right"></i> 150,000+ placements/year
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In-Demand Skills Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">In-Demand Skills 2026</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-code text-blue-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Web & App Development</h4>
+                                <p class="text-sm text-slate-600">React, Node.js, Flutter, Python</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-database text-green-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Data Science & AI</h4>
+                                <p class="text-sm text-slate-600">Machine Learning, Analytics, SQL</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-chart-line text-purple-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Digital Marketing</h4>
+                                <p class="text-sm text-slate-600">SEO, Analytics, Content Strategy</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-mobile-alt text-cyan-600 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Cloud & DevOps</h4>
+                                <p class="text-sm text-slate-600">AWS, Azure, Docker, Kubernetes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative h-96 hidden md:block">
+                    <div class="absolute inset-0 gradient-primary rounded-3xl opacity-20 blur-2xl"></div>
+                    <div class="relative h-full bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-8 flex flex-col justify-center items-center text-center border border-slate-200">
+                        <div class="text-6xl mb-4">
+                            <i class="fas fa-laptop-code text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Master In-Demand Skills</h3>
+                        <p class="text-slate-600">Level up your career with the most sought-after skills in 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Cards Showcase -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">Featured Opportunities</h2>
+                <p class="text-xl text-slate-600">Premium positions updated daily from India's leading companies</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Job Card 1 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-slate-200 premium-shadow">
+                    <div class="h-32 bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white text-5xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-white/10 group-hover:scale-110 transition origin-center"></div>
+                        <i class="fas fa-laptop-code relative z-10"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Senior Software Engineer</h3>
+                                <p class="text-blue-600 font-bold text-sm">TCS</p>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">Full-Time</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Build scalable systems for millions of users. Work with cutting-edge technologies.</p>
+                        <div class="flex gap-4 text-sm text-slate-600 mb-4 pb-4 border-b border-slate-200">
+                            <span class="flex items-center gap-1"><i class="fas fa-map-marker text-primary"></i> Bengaluru, Karnataka</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-rupee-sign text-green-600"></i> ₹20-30 LPA</span>
+                        </div>
+                        <a href="apply.html" class="w-full py-3 gradient-primary text-white rounded-lg font-bold hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Job Card 2 -->
+                <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-slate-200 premium-shadow">
+                    <div class="h-32 bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white text-5xl">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Data Scientist</h3>
+                                <p class="text-orange-600 font-bold text-sm">Amazon India</p>
+                            </div>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-bold">Full-Time</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Analyze massive datasets and drive business insights. Lead data-driven projects.</p>
+                        <div class="flex gap-4 text-sm text-slate-600 mb-4 pb-4 border-b border-slate-200">
+                            <span class="flex items-center gap-1"><i class="fas fa-map-marker text-primary"></i> Hyderabad</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-rupee-sign text-green-600"></i> ₹18-25 LPA</span>
+                        </div>
+                        <a href="apply.html" class="w-full py-3 gradient-primary text-white rounded-lg font-bold hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Job Card 3 (Featured) -->
+                <div class="card-hover group relative bg-white rounded-2xl overflow-hidden border-2 border-cyan-400 premium-shadow">
+                    <div class="absolute top-4 right-4 px-4 py-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full text-xs font-bold flex items-center gap-1">
+                        <i class="fas fa-star"></i> FEATURED
+                    </div>
+                    <div class="h-32 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white text-5xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900">Product Manager</h3>
+                                <p class="text-purple-600 font-bold text-sm">Razorpay</p>
+                            </div>
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-bold">Remote</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">Shape the future of FinTech. Lead product strategy for millions of users.</p>
+                        <div class="flex gap-4 text-sm text-slate-600 mb-4 pb-4 border-b border-slate-200">
+                            <span class="flex items-center gap-1"><i class="fas fa-globe text-primary"></i> Remote</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-rupee-sign text-green-600"></i> ₹25-35 LPA</span>
+                        </div>
+                        <a href="apply.html" class="w-full py-3 gradient-primary text-white rounded-lg font-bold hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="home.html" class="inline-block px-10 py-4 gradient-primary text-white font-bold rounded-xl hover:shadow-lg transition flex items-center gap-2">
+                    <i class="fas fa-briefcase"></i> View All 50,000+ Jobs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="gradient-primary py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 text-white">
+                <div class="text-center">
+                    <p class="text-5xl font-bold mb-2">50K+</p>
+                    <p class="text-lg text-blue-100 mb-1">Active Jobs</p>
+                    <p class="text-xs text-blue-200">Updated Daily</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-5xl font-bold mb-2">2.5L+</p>
+                    <p class="text-lg text-blue-100 mb-1">Professionals</p>
+                    <p class="text-xs text-blue-200">From All States</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-5xl font-bold mb-2">5K+</p>
+                    <p class="text-lg text-blue-100 mb-1">Companies</p>
+                    <p class="text-xs text-blue-200">Verified Employers</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-5xl font-bold mb-2">1.5L+</p>
+                    <p class="text-lg text-blue-100 mb-1">Placements</p>
+                    <p class="text-xs text-blue-200">This Year Alone</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">Success Stories from Our Community</h2>
+                <p class="text-xl text-slate-600">Real professionals sharing their career transformation journeys</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl border-2 border-blue-200 premium-shadow">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 mb-6 italic text-lg">"CareerHub helped me land my dream job at TCS within 2 weeks! The application process was incredibly smooth."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white font-bold text-lg">AK</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Arjun Kumar</p>
+                            <p class="text-sm text-slate-600 font-semibold">Senior Software Engineer @ TCS</p>
+                            <p class="text-xs text-blue-600 mt-1">Salary: ₹24 LPA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="card-hover bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-2 border-green-200 premium-shadow">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 mb-6 italic text-lg">"I switched from ₹12 LPA to ₹18 LPA at a startup. CareerHub showed me opportunities I didn't know existed!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white font-bold text-lg">PJ</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Priya Joshi</p>
+                            <p class="text-sm text-slate-600 font-semibold">Product Manager @ Startup</p>
+                            <p class="text-xs text-green-600 mt-1">Salary Hike: +50%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 premium-shadow">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                        <i class="fas fa-star text-yellow-400 text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 mb-6 italic text-lg">"As a Bihar native, finding remote jobs here was perfect! Now earning ₹14 LPA without leaving my city."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white font-bold text-lg">RK</div>
+                        <div>
+                            <p class="font-bold text-slate-900">Raj Kumar Singh</p>
+                            <p class="text-sm text-slate-600 font-semibold">Data Analyst, Remote (Bihar)</p>
+                            <p class="text-xs text-purple-600 mt-1">Work from Home ✓</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="gradient-primary py-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mb-6">Ready to Transform Your Career?</h2>
+            <p class="text-xl lg:text-2xl text-blue-100 mb-10">Join 2.5 lakh+ professionals who found their dream job on CareerHub</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="home.html" class="px-10 py-4 bg-white text-primary font-bold rounded-xl hover:bg-blue-50 transition shadow-lg flex items-center justify-center gap-2 text-lg">
+                    <i class="fas fa-search"></i> Explore 50K+ Jobs
+                </a>
+                <a href="create-account.html" class="px-10 py-4 border-3 border-white text-white font-bold rounded-xl hover:bg-white/20 transition flex items-center justify-center gap-2 text-lg">
+                    <i class="fas fa-user-plus"></i> Sign Up Free
+                </a>
+            </div>
+            
+            <p class="text-blue-100 text-sm">No credit card required • Takes less than 2 minutes • Start applying immediately</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center text-white font-bold">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4 class="text-white font-bold text-lg">CareerHub</h4>
+                    </div>
+                    <p class="text-sm leading-relaxed">Your gateway to premium career opportunities across India. Connecting talent with destiny since 2024.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">For Job Seekers</h4>
+                    <ul class="text-sm space-y-3">
+                        <li><a href="home.html" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-arrow-right text-cyan-400"></i>Browse Jobs</a></li>
+                        <li><a href="apply.html" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-arrow-right text-cyan-400"></i>Apply Now</a></li>
+                        <li><a href="create-account.html" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-arrow-right text-cyan-400"></i>Create Profile</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Company</h4>
+                    <ul class="text-sm space-y-3">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Follow Us</h4>
+                    <div class="flex gap-4 text-lg mb-6">
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:gradient-primary transition">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:gradient-primary transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:gradient-primary transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:gradient-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p class="text-xs text-slate-500">© 2026 CareerHub India. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 pt-8">
+                <div class="grid md:grid-cols-3 gap-8 text-sm">
+                    <div>
+                        <h5 class="font-semibold text-white mb-3">Trending Cities</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Bengaluru, Karnataka</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Delhi</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Mumbai</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Hyderabad</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Remote</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="font-semibold text-white mb-3">Popular Roles</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Developer</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Designer</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Manager</span>
+                            <span class="bg-slate-800 px-3 py-1 rounded-full">Analyst</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-400 mb-4">Made with <span class="text-red-500">❤️</span> for India's Job Seekers</p>
+                        <p class="text-gray-500 text-xs">Building India's #1 Job Portal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced HD/4K logo handling with quality parameters
+        function handleLogoError(img, companyName, domain) {
+            if (!img.dataset.fallbackAttempt) img.dataset.fallbackAttempt = 0;
+            const attempt = parseInt(img.dataset.fallbackAttempt);
+            const devicePixelRatio = window.devicePixelRatio || 1;
+            
+            if (attempt === 0) {
+                // Attempt 1: Logo.dev API with HD resolution
+                img.dataset.fallbackAttempt = 1;
+                img.src = `https://img.logo.dev/${domain}?token=pk_X-NvO5CWSuOjYLhEP5B1Yw&size=400`;
+                img.onerror = function() { handleLogoError(this, companyName, domain); };
+            } else if (attempt === 1) {
+                // Attempt 2: Google favicon service (reliable fallback)
+                img.dataset.fallbackAttempt = 2;
+                img.src = `https://www.google.com/s2/favicons?sz=256&domain=${domain}`;
+                img.onerror = function() { handleLogoError(this, companyName, domain); };
+            } else if (attempt === 2) {
+                // Attempt 3: SVG badge with company initials
+                img.dataset.fallbackAttempt = 3;
+                const initials = companyName.split(' ').map(w => w[0]).join('');
+                const colors = ['#0066cc', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f39c12', '#9b59b6', '#2c3e50', '#e74c3c'];
+                const color = colors[Math.abs(companyName.charCodeAt(0)) % colors.length];
+                img.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='${color.replace('#','%23')}' width='200' height='200' rx='30'/%3E%3Ctext x='100' y='110' text-anchor='middle' fill='white' font-size='90' font-weight='700' font-family='Poppins,Arial,sans-serif'%3E${initials}%3C/text%3E%3C/svg%3E`;
+                img.onerror = null;
+            }
+        }
+        
+        // Initialize logos with HD quality
+        document.addEventListener('DOMContentLoaded', function() {
+            const logos = document.querySelectorAll('.company-logo-img');
+            
+            logos.forEach(logo => {
+                logo.style.opacity = '0.95';
+                logo.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="auth.js"></script>
+    <script src="index.js?v=202602011600"></script>
+</body>
+</html>
+

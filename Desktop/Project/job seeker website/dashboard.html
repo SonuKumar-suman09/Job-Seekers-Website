@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard - CareerHub | Job Applications & Stats</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#0066cc',
+                    secondary: '#00d4ff',
+                }
+            }
+        }
+    }
+  </script>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .gradient-primary { background: linear-gradient(135deg, #0066cc 0%, #00d4ff 100%); }
+    .gradient-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .gradient-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .gradient-orange { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .premium-shadow { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
+    .stat-card { 
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .stat-card:hover::before {
+      left: 100%;
+    }
+    .stat-card:hover { 
+      transform: translateY(-8px) scale(1.02); 
+      box-shadow: 0 20px 60px rgba(0, 102, 204, 0.2); 
+    }
+    .skill-badge {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .skill-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .profile-photo-container {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .profile-photo-container:hover {
+      transform: scale(1.05);
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    .experience-card {
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+    .experience-card:hover {
+      border-left-color: #0066cc;
+      background: linear-gradient(to right, #f8fafc, white);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 premium-shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 text-slate-900 font-bold text-xl hover:text-primary transition">
+          <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center text-white">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <span>CareerHub</span>
+        </a>
+        
+        <div class="hidden md:flex gap-8">
+          <a href="index.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <a href="home.html" class="text-slate-700 hover:text-primary font-semibold transition flex items-center gap-1">
+            <i class="fas fa-briefcase"></i> Jobs
+          </a>
+          <a href="dashboard.html" class="text-primary border-b-2 border-primary font-semibold flex items-center gap-1">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </div>
+        
+        <div id="authContainer" class="flex items-center gap-4">
+          <!-- Profile with Photo -->
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center overflow-hidden border-2 border-blue-300 shadow-md">
+              <img id="navProfilePhoto" src="" alt="Profile" class="w-full h-full object-cover hidden">
+              <i class="fas fa-user text-white" id="navProfileIcon"></i>
+            </div>
+            <a href="#" onclick="editProfile(); return false;" class="px-4 py-2 gradient-primary text-white font-semibold rounded-lg hover:shadow-lg transition flex items-center gap-2">
+              <i class="fas fa-user-circle"></i> Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="min-h-screen py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header with Enhanced Profile Card -->
+      <div class="mb-12 animate-fade-in">
+        <div class="bg-gradient-to-r from-primary via-cyan-500 to-blue-600 rounded-2xl text-white p-8 md:p-10 premium-shadow relative overflow-hidden">
+          <!-- Decorative Elements -->
+          <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+          <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
+          
+          <div class="relative z-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div class="flex items-center gap-6 flex-1">
+                <div class="profile-photo-container w-28 h-28 bg-white/20 rounded-2xl flex items-center justify-center text-5xl backdrop-blur-lg flex-shrink-0 overflow-hidden border-4 border-white/40 shadow-2xl">
+                  <img id="profilePhoto" src="" alt="Profile" class="w-full h-full object-cover hidden">
+                  <i class="fas fa-user text-white/90"></i>
+                </div>
+                <div>
+                  <h1 id="seekerName" class="text-4xl md:text-5xl font-extrabold mb-2 drop-shadow-lg">Sonu Kumar Suman</h1>
+                  <p id="seekerEmail" class="text-lg text-blue-50 flex items-center gap-2 mb-2">
+                    <i class="fas fa-envelope"></i> sonu@example.com
+                  </p>
+                  <p id="seekerTitle" class="text-blue-100 flex items-center gap-2 font-medium">
+                    <i class="fas fa-briefcase"></i> Job Seeker | Career Enthusiast
+                  </p>
+                </div>
+              </div>
+              <button onclick="editProfile()" class="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 whitespace-nowrap shadow-xl hover:shadow-2xl hover:scale-105">
+                <i class="fas fa-user-edit text-lg"></i> Edit Profile
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 pt-8 border-t border-white/30">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur">
+                  <i class="fas fa-phone text-2xl"></i>
+                </div>
+                <div>
+                  <p class="text-blue-100 text-sm font-semibold">Phone</p>
+                  <p id="seekerPhone" class="font-bold text-lg mt-1">+91 98765-43210</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur">
+                  <i class="fas fa-map-marker-alt text-2xl"></i>
+                </div>
+                <div>
+                  <p class="text-blue-100 text-sm font-semibold">Location</p>
+                  <p id="seekerLocation" class="font-bold text-lg mt-1">Bengaluru, Karnataka</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur">
+                  <i class="fas fa-calendar-check text-2xl"></i>
+                </div>
+                <div>
+                  <p class="text-blue-100 text-sm font-semibold">Member Since</p>
+                  <p id="memberSince" class="font-bold text-lg mt-1">Feb 2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Stats Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-fade-in">
+        <!-- Total Applications -->
+        <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl premium-shadow p-6 text-white">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur">
+              <i class="fas fa-file-alt text-3xl"></i>
+            </div>
+            <span class="text-4xl font-extrabold" id="totalApps">0</span>
+          </div>
+          <p class="font-semibold text-blue-100">Applications Submitted</p>
+          <div class="mt-3 pt-3 border-t border-white/30 flex items-center gap-2 text-sm">
+            <i class="fas fa-arrow-up"></i>
+            <span class="font-medium">Track your progress</span>
+          </div>
+        </div>
+
+        <!-- Saved Jobs -->
+        <div class="stat-card bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl premium-shadow p-6 text-white">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur">
+              <i class="fas fa-heart text-3xl"></i>
+            </div>
+            <span class="text-4xl font-extrabold" id="savedCount">0</span>
+          </div>
+          <p class="font-semibold text-red-100">Saved Jobs</p>
+          <div class="mt-3 pt-3 border-t border-white/30 flex items-center gap-2 text-sm">
+            <i class="fas fa-bookmark"></i>
+            <span class="font-medium">Your favorites</span>
+          </div>
+        </div>
+
+        <!-- Applied Jobs -->
+        <div class="stat-card bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl premium-shadow p-6 text-white">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur">
+              <i class="fas fa-check-circle text-3xl"></i>
+            </div>
+            <span class="text-4xl font-extrabold" id="appliedCount">0</span>
+          </div>
+          <p class="font-semibold text-green-100">Applied Jobs</p>
+          <div class="mt-3 pt-3 border-t border-white/30 flex items-center gap-2 text-sm">
+            <i class="fas fa-paper-plane"></i>
+            <span class="font-medium">Active applications</span>
+          </div>
+        </div>
+
+        <!-- Profile Completion -->
+        <div class="stat-card bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl premium-shadow p-6 text-white">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur">
+              <i class="fas fa-user-check text-3xl"></i>
+            </div>
+            <span class="text-4xl font-extrabold" id="profilePercent">75%</span>
+          </div>
+          <p class="font-semibold text-purple-100">Profile Complete</p>
+          <div class="mt-3 pt-3 border-t border-white/30">
+            <div id="profileBar" class="w-full bg-white/20 rounded-full h-2.5 overflow-hidden">
+              <div class="bg-white h-2.5 rounded-full transition-all duration-1000 shadow-lg" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Info Section with Enhanced Design -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- Skills & Expertise - Enhanced -->
+        <div class="bg-white rounded-2xl premium-shadow p-8 animate-fade-in hover:shadow-2xl transition-all duration-300">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                <i class="fas fa-star text-white text-xl"></i>
+              </div>
+              <span>Skills & Expertise</span>
+            </h2>
+            <button onclick="addSkill()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+          <div id="skillsList" class="flex flex-wrap gap-3">
+            <span class="skill-badge px-5 py-2.5 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-xl font-semibold text-sm border-2 border-blue-200">JavaScript</span>
+            <span class="skill-badge px-5 py-2.5 bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 rounded-xl font-semibold text-sm border-2 border-green-200">React</span>
+            <span class="skill-badge px-5 py-2.5 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-xl font-semibold text-sm border-2 border-purple-200">Web Development</span>
+          </div>
+          <p class="text-slate-500 text-sm mt-6 flex items-center gap-2">
+            <i class="fas fa-info-circle"></i> 
+            Click skills to manage or add new ones
+          </p>
+        </div>
+
+        <!-- Experience & Education - Enhanced -->
+        <div class="bg-white rounded-2xl premium-shadow p-8 animate-fade-in hover:shadow-2xl transition-all duration-300">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <i class="fas fa-briefcase text-white text-xl"></i>
+              </div>
+              <span>Experience & Education</span>
+            </h2>
+            <button onclick="addExperience()" class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+          <div id="experienceList" class="space-y-4">
+            <div class="experience-card pb-4 pl-4 rounded-lg transition-all duration-300">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-code text-blue-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-slate-900 text-lg">Junior Web Developer</p>
+                  <p class="text-sm text-slate-600 flex items-center gap-2 mt-1">
+                    <i class="fas fa-building text-green-600"></i> TCS • 1-2 Years Experience
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="experience-card pb-4 pl-4 rounded-lg transition-all duration-300">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-graduation-cap text-purple-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-slate-900 text-lg">B.Tech in Computer Science</p>
+                  <p class="text-sm text-slate-600 flex items-center gap-2 mt-1">
+                    <i class="fas fa-university text-indigo-600"></i> University • 2024 Passed Out
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-slate-500 text-sm mt-6 flex items-center gap-2">
+            <i class="fas fa-info-circle"></i> 
+            Build your professional journey
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-gray-300 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-rocket text-cyan-400"></i>
+            CareerHub
+          </h4>
+          <p class="text-sm">India's #1 Premium Job Portal</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Quick Links</h4>
+          <ul class="text-sm space-y-2">
+            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+            <li><a href="index.html" class="hover:text-white transition">Jobs</a></li>
+            <li><a href="index.html" class="hover:text-white transition">Dashboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Support</h4>
+          <ul class="text-sm space-y-2">
+            <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Follow Us</h4>
+          <div class="flex gap-4 text-lg">
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-slate-700 pt-8 text-center">
+        <p>&copy; 2026 CareerHub. All rights reserved. | Made for India's Job Seekers</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

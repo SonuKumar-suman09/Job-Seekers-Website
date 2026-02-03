@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Premium Job Opportunities on CareerHub">
+    <title>Explore Jobs - CareerHub | 50K+ Premium Opportunities</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0052cc',
+                        'primary-light': '#0066e6',
+                        'primary-dark': '#003a99',
+                        secondary: '#00b4f1',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts - Modern System Font Stack -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Modern CSS -->
+    <link rel="stylesheet" href="home.css">
+    
+    <style>
+        * { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, sans-serif;
+        }
+        .gradient-primary { 
+            background: linear-gradient(135deg, #0052cc 0%, #0066e6 100%); 
+        }
+        .premium-shadow { 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); 
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100">
+    <!-- Navigation - Modern Design -->
+    <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition">
+                <i class="fas fa-rocket text-2xl"></i>
+                <span class="text-xl font-bold">CareerHub</span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="text-slate-600 hover:text-blue-600 font-medium transition flex items-center gap-1.5 text-sm">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="home.html" class="text-blue-600 font-semibold flex items-center gap-1.5 text-sm border-b-2 border-blue-600 pb-0.5">
+                    <i class="fas fa-briefcase"></i> Jobs
+                </a>
+                <a href="dashboard.html" class="text-slate-600 hover:text-blue-600 font-medium transition flex items-center gap-1.5 text-sm">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+            </div>
+            
+            <div id="authContainer" class="flex items-center gap-2.5">
+                <a href="login.html" class="px-4 py-2 text-sm border border-slate-300 text-slate-700 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition flex items-center gap-1.5">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="create-account.html" class="px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:shadow-md hover:from-blue-700 hover:to-blue-800 transition flex items-center gap-1.5">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search & Filter Section -->
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-5">
+            <div class="grid md:grid-cols-5 gap-3 mb-4">
+                <!-- Search by Title -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Job Title</label>
+                    <input type="text" id="titleSearch" list="jobTitleOptions" placeholder="e.g. Software Engineer" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    <datalist id="jobTitleOptions"></datalist>
+                </div>
+                
+                <!-- Search by Company -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Company</label>
+                    <input type="text" id="companySearch" list="companyOptions" placeholder="e.g. TCS, Amazon" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    <datalist id="companyOptions"></datalist>
+                </div>
+                
+                <!-- Search by Location -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Location</label>
+                    <input type="text" id="locationSearch" placeholder="e.g. Bengaluru" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+                    <button type="button" id="detectLocationBtn" class="mt-1.5 text-xs font-medium text-blue-600 hover:text-blue-700 transition flex items-center gap-1.5">
+                        <i class="fas fa-location-crosshairs text-sm"></i> Detect Location
+                    </button>
+                </div>
+
+                <!-- Job Type Filter -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Job Type</label>
+                    <select id="jobType" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition bg-white">
+                        <option value="">All Types</option>
+                        <option value="Full-Time">Full-Time</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Part-Time">Part-Time</option>
+                    </select>
+                </div>
+                
+                <!-- Salary Range Filter -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">Salary (LPA)</label>
+                    <select id="salaryRange" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition bg-white">
+                        <option value="">All Ranges</option>
+                        <option value="0-8">₹0 - ₹8</option>
+                        <option value="8-12">₹8 - ₹12</option>
+                        <option value="12-20">₹12 - ₹20</option>
+                        <option value="20">₹20+</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-2.5">
+                <button onclick="searchJobs()" class="flex-1 md:flex-initial px-7 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:shadow-lg hover:from-blue-700 hover:to-blue-800 transition-all flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-search"></i> Search Jobs
+                </button>
+                <button id="loadLiveJobsBtn" class="px-5 py-2.5 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-bolt"></i> Live Jobs
+                </button>
+                <button onclick="resetFilters()" class="px-5 py-2.5 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition-all text-sm">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+
+            <!-- Search Suggestions -->
+            <div id="searchSuggestions" class="mt-3 flex flex-wrap gap-2 text-sm"></div>
+            <div id="liveStatus" class="mt-2 text-xs text-slate-500 hidden"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <!-- Categories -->
+                <div class="bg-white rounded-xl p-5 shadow-lg border border-slate-100 sticky top-40 mb-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-5 flex items-center gap-2.5 pb-3 border-b-2 border-slate-100">
+                        <i class="fas fa-filter text-blue-600"></i>
+                        <span>Categories</span>
+                    </h3>
+                    <div class="space-y-2.5">
+                        <button onclick="filterByCategory('Technology')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-laptop-code text-blue-600 group-hover:text-white transition"></i>
+                            <span>Technology</span>
+                        </button>
+                        <button onclick="filterByCategory('Finance')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-chart-line text-green-600 group-hover:text-white transition"></i>
+                            <span>Finance</span>
+                        </button>
+                        <button onclick="filterByCategory('Design')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-palette text-purple-600 group-hover:text-white transition"></i>
+                            <span>Design</span>
+                        </button>
+                        <button onclick="filterByCategory('Marketing')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-pink-600 hover:to-pink-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-bullhorn text-pink-600 group-hover:text-white transition"></i>
+                            <span>Marketing</span>
+                        </button>
+                        <button onclick="filterByCategory('Healthcare')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-heartbeat text-red-600 group-hover:text-white transition"></i>
+                            <span>Healthcare</span>
+                        </button>
+                        <button onclick="filterByCategory('Education')" class="w-full text-left px-4 py-3 text-slate-700 hover:bg-gradient-to-r hover:from-amber-600 hover:to-amber-700 hover:text-white rounded-lg transition-all font-semibold flex items-center gap-3 group shadow-sm hover:shadow-md transform hover:scale-[1.02]">
+                            <i class="fas fa-book text-amber-600 group-hover:text-white transition"></i>
+                            <span>Education</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Saved & Applied Jobs Tabs -->
+                <div class="bg-white rounded-xl p-5 shadow-lg border border-slate-100 sticky top-96">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 pb-3 border-b-2 border-slate-100">
+                        <i class="fas fa-chart-bar text-blue-600"></i>
+                        <span>My Activity</span>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-l-4 border-blue-600 shadow-sm hover:shadow-md transition transform hover:scale-[1.02] cursor-pointer">
+                            <p class="text-sm font-bold text-slate-900 flex items-center gap-2.5">
+                                <i class="fas fa-bookmark text-blue-600 text-lg"></i>
+                                <span id="savedCount">0</span> Jobs Saved
+                            </p>
+                        </div>
+                        <div class="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border-l-4 border-green-600 shadow-sm hover:shadow-md transition transform hover:scale-[1.02] cursor-pointer">
+                            <p class="text-sm font-bold text-slate-900 flex items-center gap-2.5">
+                                <i class="fas fa-check-circle text-green-600 text-lg"></i>
+                                <span id="appliedCount">0</span> Applied
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Grid -->
+            <div class="lg:col-span-3">
+                <!-- Jobs Counter -->
+                <div class="mb-6 flex items-center justify-between">
+                    <h2 class="text-2xl font-bold text-slate-900" id="jobsTitle">All Jobs</h2>
+                    <div class="flex items-center gap-3">
+                        <div class="text-sm text-slate-600 font-semibold">
+                            <span id="jobsCount">0</span> Jobs Found
+                        </div>
+                        <div>
+                            <label class="sr-only" for="sortBy">Sort By</label>
+                            <select id="sortBy" class="px-3 py-2 border border-slate-300 rounded-lg text-sm font-semibold text-slate-700 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
+                                <option value="relevance">Sort: Relevance</option>
+                                <option value="newest">Newest</option>
+                                <option value="rating">Top Rated</option>
+                                <option value="salary">Highest Salary</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jobs List -->
+                <div id="jobsList" class="space-y-6">
+                    <!-- Jobs will be loaded here -->
+                </div>
+
+                <!-- No Results -->
+                <div id="noResults" class="hidden text-center py-12">
+                    <i class="fas fa-search text-6xl text-slate-300 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">No Jobs Found</h3>
+                    <p class="text-slate-600">Try adjusting your filters or search terms</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-gray-300 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-rocket text-cyan-400"></i>
+                        CareerHub
+                    </h4>
+                    <p class="text-sm">India's #1 Premium Job Portal. Connecting talent with opportunity.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="index.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Home</a></li>
+                        <li><a href="home.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Jobs</a></li>
+                        <li><a href="apply.html" class="hover:text-white transition"><i class="fas fa-arrow-right mr-2"></i>Apply</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Company</h4>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Follow Us</h4>
+                    <div class="flex gap-4 text-lg mb-4">
+                        <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/sonukumarsuman09/" target="_blank" class="hover:text-cyan-400 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="hover:text-cyan-400 transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 pt-8 text-center">
+                <p>&copy; 2026 CareerHub. All rights reserved. | Made for India's Job Seekers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>
