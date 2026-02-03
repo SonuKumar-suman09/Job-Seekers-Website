@@ -1,45 +1,22 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
 
-const PORT = 8000;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  // Default to index.html if root is requested
-  let filePath = req.url === '/' ? '/index.html' : req.url;
-  filePath = path.join(__dirname, filePath);
+// Serve static files from current directory
+app.use(express.static(__dirname));
 
-  // Get file extension
-  const ext = path.extname(filePath);
-
-  // Read the file
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/html' });
-      res.end('<h1>404 - File Not Found</h1>');
-      return;
-    }
-
-    // Set content type
-    let contentType = 'text/html';
-    if (ext === '.css') contentType = 'text/css';
-    if (ext === '.js') contentType = 'application/javascript';
-    if (ext === '.json') contentType = 'application/json';
-    if (ext === '.png') contentType = 'image/png';
-    if (ext === '.jpg' || ext === '.jpeg') contentType = 'image/jpeg';
-    if (ext === '.gif') contentType = 'image/gif';
-    if (ext === '.svg') contentType = 'image/svg+xml';
-    if (ext === '.avif') contentType = 'image/avif';
-
-    res.writeHead(200, {
-      'Content-Type': contentType,
-      'Cache-Control': 'no-cache, no-store, must-revalidate'
-    });
-    res.end(data);
-  });
+// Default route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`Server running at http://127.0.0.1:${PORT}/`);
-  console.log(`Serving files from: ${__dirname}`);
+// Catch-all for any routes - serve index.html (for SPA routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
