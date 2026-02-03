@@ -1,110 +1,25 @@
-<div align="center">
+# CareerHub - Job Seeker Website
 
-# 🚀 CareerHub - Premium Job Portal Platform
+A modern job portal platform for India's job seekers.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://job-seeker-website-black.vercel.app)
-[![Live Demo](https://img.shields.io/badge/Live-Demo-00D4FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://job-seeker-website-black.vercel.app)
-[![GitHub Stars](https://img.shields.io/github/stars/SonuKumar-suman09/Job-Seekers-Website?style=for-the-badge&logo=github)](https://github.com/SonuKumar-suman09/Job-Seekers-Website)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+## Live Demo
+🌐 [https://job-seeker-website-black.vercel.app](https://job-seeker-website-black.vercel.app)
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=28&pause=1000&color=0066CC&center=true&vCenter=true&width=600&lines=Connect+with+Top+Companies;Track+Your+Applications;Build+Your+Career" alt="Typing SVG" />
+## Features
+- Job search and filtering
+- Application tracking
+- User dashboard
+- Profile management
+- Real company integrations
 
-**A modern, feature-rich job portal connecting seekers with India's top companies**
+## Tech Stack
+- HTML, CSS, JavaScript
+- Tailwind CSS
+- Vercel
 
-### 🔗 Quick Access
+## Author
+Sonu Kumar Suman
 
-<table>
-<tr>
-<td align="center"><a href="https://job-seeker-website-black.vercel.app"><img src="https://img.shields.io/badge/🌐_Live_Website-Visit_Now-0066CC?style=for-the-badge" alt="Live Website"/></a></td>
-<td align="center"><a href="https://vercel.com/sonus-projects-7049e6d8/job-seeker-website"><img src="https://img.shields.io/badge/📦_Vercel-Dashboard-000000?style=for-the-badge" alt="Vercel"/></a></td>
-<td align="center"><a href="#getting-started"><img src="https://img.shields.io/badge/📖_Documentation-Read-00D4FF?style=for-the-badge" alt="Docs"/></a></td>
-</tr>
-</table>
-
-</div>
-
----
-
-## 📋 Table of Contents
-
-<details>
-<summary>Click to expand</summary>
-
-- [🎯 Overview](#-overview)
-- [✨ Key Features](#-key-features)
-- [🌐 Live Demo](#-live-demo)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Getting Started](#-getting-started)
-- [📁 Project Structure](#-project-structure)
-- [📱 Features Breakdown](#-features-breakdown)
-- [📖 Usage Guide](#-usage-guide)
-- [🎨 Design System](#-design-system)
-- [💾 Data Storage](#-data-storage)
-- [🤝 Contributing](#-contributing)
-- [👨‍💻 Author](#-author)
-- [📄 License](#-license)
-
-</details>
-
----
-
-## 🎯 Overview
-
-<div align="center">
-<img src="https://img.shields.io/badge/Status-Production_Ready-success?style=flat-square" alt="Status"/>
-<img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square" alt="Build"/>
-<img src="https://img.shields.io/badge/Code_Quality-A+-blue?style=flat-square" alt="Quality"/>
-<img src="https://img.shields.io/badge/Coverage-95%25-green?style=flat-square" alt="Coverage"/>
-</div>
-
-<br>
-
-**CareerHub** is a comprehensive job portal platform that connects job seekers with top companies across India. Built with modern web technologies, it offers a seamless user experience with advanced features like real-time job search, application tracking, profile management, and direct company integrations.
-
-### 💡 Why CareerHub?
-
-<table>
-<tr>
-<td width="33%">
-
-#### 🎨 Modern Design
-Beautiful, responsive UI with glassmorphism effects and smooth animations
-
-</td>
-<td width="33%">
-
-#### 🏢 Real Companies
-Direct integration with 8+ major Indian companies like TCS, Amazon, Swiggy
-
-</td>
-<td width="33%">
-
-#### 📊 Analytics
-Comprehensive dashboard to track applications and monitor progress
-
-</td>
-</tr>
-<tr>
-<td width="33%">
-
-#### ⚡ Lightning Fast
-Client-side application with instant load times under 2 seconds
-
-</td>
-<td width="33%">
-
-#### 🔒 Privacy First
-All data stored locally, never sent to servers
-
-</td>
-<td width="33%">
-
-#### 📱 Fully Responsive
-Perfect experience on mobile, tablet, and desktop
-
-</td>
-</tr>
-</table>
 ---
 
 ## ✨ Key Features
