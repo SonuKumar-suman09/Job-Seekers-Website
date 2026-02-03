@@ -1185,3 +1185,37 @@ function exportDashboardData() {
     a.download = 'dashboard-data.json';
     a.click();
 }
+
+// Handle quick profile photo upload from profile picture area
+function handleQuickPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const photoData = e.target.result;
+            analytics.updateSeekerProfile({ profilePhoto: photoData });
+            displayProfile();
+            
+            // Show success message
+            showNotification('Profile photo updated successfully!', 'success');
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Show notification helper
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-6 right-6 px-6 py-4 rounded-lg font-semibold shadow-lg z-50 animate-fade-in ${
+        type === 'success' ? 'bg-green-500 text-white' : 
+        type === 'error' ? 'bg-red-500 text-white' : 
+        'bg-blue-500 text-white'
+    }`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
