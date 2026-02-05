@@ -1,60 +1,65 @@
-# 🌐 Job Seeker Website
+💼 Job Seeker Website
 
-🚀 **Live Demo:**  
-👉 https://job-seeker-website-black.vercel.app/
+A modern Job Seeker Web Application designed to help users find job opportunities, explore companies, and manage their career journey efficiently. This project focuses on a clean UI, responsiveness, and real-world job portal features.
 
-This is my **personal portfolio website**, created to showcase my **skills, projects, certifications, and professional profile** in a simple and effective way.  
-The website is designed especially for **job and internship applications**, helping recruiters quickly understand who I am and what I can do.
+🔗 Live Website:
+https://job-seeker-website-black.vercel.app/
 
----
+🚀 Features
 
-## ✨ Key Features
+🔍 Search and explore job listings
 
-- 👤 Professional **About Me** section
-- 🛠️ Technical **Skills & Technologies**
-- 💻 **Projects** with descriptions
-- 📜 Certifications & achievements
-- 📄 Resume / career-focused content
-- 📬 Contact section for easy communication
-- 📱 Fully **responsive design** (mobile & desktop)
+🏢 View company profiles
 
----
+👤 User authentication (Login / Sign Up)
 
-## 🧑‍💻 Tech Stack Used
+📄 Job details with apply option
 
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-- **Vercel** (for deployment)
+📱 Fully responsive design (mobile + desktop)
 
----
+🎨 Modern and professional UI
 
-## 📸 Preview
+🛠️ Tech Stack
 
-You can view the live website here:  
-🔗 https://job-seeker-website-black.vercel.app/
+Frontend: HTML, CSS, JavaScript, React
 
----
+Styling: Tailwind CSS
 
-## 🎯 Purpose of This Project
+Deployment: Vercel
 
-This portfolio website is built to:
+📸 Screenshots
 
-- Support **job & internship applications**
-- Present my profile in a **professional manner**
-- Showcase **real-world projects and skills**
-- Act as a **digital resume** for recruiters
+Add screenshots of your website here (optional but recommended).
 
----
+⚙️ Installation & Setup
 
-## 📂 Project Structure
+Clone the repository:
+
+git clone https://github.com/your-username/job-seeker-website.git
+cd job-seeker-website
+
+
+Install dependencies:
+
+npm install
+
+
+Run the project locally:
+
+npm run dev
+
+
+Open in browser:
+
+http://localhost:3000
+
+📂 Project Structure
 job-seeker-website/
-│
-├── index.html
-├── css/
-│ └── style.css
-├── js/
-│ └── script.js
-├── assets/
-│ └── images/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── assets/
+│   └── styles/
+├── package.json
 └── README.md
