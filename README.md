@@ -1,4 +1,4 @@
-# 🌐 Job Seeker Portfolio Website
+# 🌐 Job Seeker Website
 
 🚀 **Live Demo:**  
 👉 https://job-seeker-website-black.vercel.app/
